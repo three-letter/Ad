@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+#coding:utf-8
+require File.expand_path("../bin/order",__FILE__)
+require File.expand_path("../bin/product",__FILE__)
+require File.expand_path("../bin/cast",__FILE__)
+
+class Test
+	def process args
+		# create order
+		order = Ad::Order.new args
+		msg,order_id = order.create	
+		return msg unless msg == "操作成功"
+		# submit order
+		order.submit(order_id)
+		# pro set
+		pro = Ad::Product.new("{:order_id => #{order_id}}")
+		pro.set
+		# submit config
+		conf = pro.config
+		pro.submit(conf)
+		order_id
+	end
+	def scheduled order_id
+		pro = Ad::Product.new("{:order_id => #{order_id}}")
+		conf = pro.config
+		# scheduled pro
+		pro.scheduled conf
+	end
+	def casting order_id,idea_name
+		cast = Ad::Cast.new(order_id,idea_name)
+		cast.case
+		cast.idea
+	end
+end
+
+
+# 创建订单，并预定产品
+order_opts = ""
+idea_name  = ""
+args = ARGV
+order_opts = args[0] if args.length > 0
+idea_name = args[1] if args.length > 1
+order_id = order_opts.to_i
+t = Test.new
+if order_id == 0
+	opt = eval(order_opts)
+	order_id = t.process opt
+	puts "Order_id: #{order_id}"
+else
+	t.scheduled order_id
+	t.casting(order_id,idea_name) unless idea_name.empty?
+end
