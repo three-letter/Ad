@@ -10,10 +10,8 @@ module Ad
 			else
 				puts <<-INFO
 The command is lost.
-
 Usage:
-	./ad <command> [arguments]
-
+  ./ad <command> [arguments]
 Commands:
   #{@@COMMANDS.join(", ")}
 				INFO
