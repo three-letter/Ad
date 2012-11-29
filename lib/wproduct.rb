@@ -4,24 +4,18 @@ require File.expand_path("../base",__FILE__)
 
 module Ad
 	# 订单的产品预订模块
-	class Product < Ad::Base
+	class WProduct < Ad::Base
 		include Ad::Login
 
 		# 默认产品选项参数/值
 		@@DEFAULT_OPTIONS = {
 			:config_id        => "null",
-			:config_type      => 0,
-			:accord_channel   => ["c","d"], 
-			:check_all_city   => 1, 
-			:accord_province	=> [52,36,15,42,43,22,35,37,45,44,51,34,62,71,81,32,21,14,46,41,61,13,23,33,65,53,63,64,82,54,99],
-			:core_city        => [11,31,440100,440300,510100,50,420100,320100,430100,210100,330100,12],
 			:desc             => "",
 			:order_id         => 0,
 			:product_id       => 1,
-			:t_type           => 0,
 			:time             => [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
 			:time_check_all   => "radiobutton",
-			:action      => "#{Ad::Login::HOST}/vp/vpConfigAdd.sdo"
+			:action           => "#{Ad::Login::HOST}/vp/wConfigActionAdd.sdo"
 		}
 		
 		# 设置产品信息，包括：类型 地区 时间等

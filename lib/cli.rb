@@ -1,7 +1,7 @@
 
 module Ad
 	module Cli
-		@@COMMANDS = %W{order product config scheduled cast idea}
+		@@COMMANDS = %W{order product wproduct config scheduled cast idea submit shortcut db}
 
 		def self.run
 			command = ARGV.shift

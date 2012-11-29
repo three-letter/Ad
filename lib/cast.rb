@@ -9,7 +9,7 @@ module Ad
 		@@DEFAULT_OPTIONS = {
 			:order_id						=> 0,
 			:index							=> 0,
-			:ad_type_id					=> 88,
+			:ad_type_id					=> nil,
 			:name								=> nil,
 			:add								=> "新增",
 			:change_flag				=> "null",
@@ -21,7 +21,8 @@ module Ad
 			:isIpVip						=> -1,
 			:isIsindexturbo			=> -1,
 			:isKeywordLimit			=> -1,
-			:isOverAll					=> 1,
+			:isOverAll					=> -1,
+			:isRates            => 0,
 			:isRegionLimit			=> -1,
 			:isUrlLimit					=> -1,
 			:isVidLimit					=> -1,
@@ -39,8 +40,10 @@ module Ad
 			pid,cid,type = register
 			name = create_show.match(/name="name"\s+value="(.+?)"/)[1] 
 			name = @opts[:name] unless @opts[:name].nil?
+			ad_type_id = create_show.match(/<OPTION\s+value="(.+?)"\s+selected>/)[1]
+			ad_type_id = @opts[:ad_type_id] unless @opts[:ad_type_id].nil?
 			data = @params
-			data += "cid=#{cid}&pid=#{pid}&type=#{URI.escape(type)}&name=#{URI.escape(name)}"
+			data += "cid=#{cid}&pid=#{pid}&type=#{URI.escape(type)}&name=#{URI.escape(name)}&ad_type_id=#{ad_type_id}"
 			conn,headers = login
 			conn.post("/cast/castAction_new.jsp",data,headers)
 		end

@@ -14,12 +14,17 @@ module Ad
 			:fre        => nil,
 			:pre        => nil,
 			:content    => nil,
-			:cpm        => 6
+			:cpm        => 12,
+			:device     => "p"
 		}
 
 		def submit
 			conn,headers = login
-			rsp = conn.post("/vp/vpConfigUpdate.sdo",@params,headers)
+			if @opts[:device] == "p"
+				rsp = conn.post("/vp/vpConfigUpdate.sdo",@params,headers)
+			else
+				rsp = conn.post("/vp/wConfigActionModifyProperty.sdo",@params,headers)
+			end
 			rsp.body
 		end
 

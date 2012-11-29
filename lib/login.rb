@@ -3,7 +3,8 @@ require 'net/http'
 
 module Ad
 	module Login
-		@@login_url = "http://10.10.221.40/login_action1.0.jsp" 
+		HOST = "http://10.10.221.40"
+		@@login_url = "#{HOST}/login_action1.0.jsp" 
 		@@user = "langhui"
 		@@pwd  = 123456
 		# 用户登陆返回conn和包含cookie的头信息
@@ -16,7 +17,7 @@ module Ad
 			cookie = rsp.response['set-cookie']
 			headers = {
 				'Content-Type' => "application/x-www-form-urlencoded; charset=UTF-8",
-				'Referer' => "http://10.10.221.40/order/createOrUpdateAdd.jsp",
+				'Referer' => "#{HOST}/order/createOrUpdateAdd.jsp",
 				'Cookie' => cookie
 			}
 			c,h = conn,headers
@@ -24,3 +25,4 @@ module Ad
 		
 	end
 end
+

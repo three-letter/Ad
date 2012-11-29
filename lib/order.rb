@@ -14,9 +14,9 @@ module Ad
 		@@PWD = 123456
 		@@DEFAULT_OPTIONS = {
 			:buyingbrief_id              => "null",
-			:order_type                  => "市场合同",
-			:order_sub_type              => "BD推广",
-			:marcket_order_class         => "A",
+			:order_type                  => "销售合同",
+			:order_sub_type              => "北京",
+			#:marcket_order_class         => "A",
 			:need_gen_cast               => "-1",
 			:customerName                => "欧莱雅      所属集团:欧莱雅集团",
 			:customerid                  => "263",
@@ -28,8 +28,8 @@ module Ad
 			:order_product               => "",
 			:discount                    => 100,
 			:cpm                         => "6",
-			:start_date                  => "2012-09-19",
-			:end_date                    => "2012-10-01",
+			:start_date                  => Time.now.strftime("%Y-%m-%d"),
+			:end_date                    => (Time.now + 60 * 60 * 24 * 3).strftime("%Y-%m-%d"),
 			:direct_name                 => "",
 			:order_direct_salsename      => -1,
 			:channel_name                => "杜芸",
@@ -40,7 +40,7 @@ module Ad
 			:order_ae_salsename          => "161",
 			:f_youku_company             => "P",
 			:money                       => 100,
-			:action											 => "http://10.10.221.40/order/action.jsp"
+			:action											 => "#{Ad::Login::HOST}/order/action.jsp"
 		}
 
 		# 通过post创建订单

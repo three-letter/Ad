@@ -8,7 +8,7 @@ opts = eval(args[0]) if args.length > 0
 
 config = Ad::Config.new(opts)
 rsp = config.submit
-if rsp.include?("<html>")
+if rsp.include?("<html>") || rsp.include?("<script>window")
 	puts "提交配置成功"
 	# 更改配置后原config_id会变,故再显示全部的配置信息
 	pro = Ad::Product.new(opts)
